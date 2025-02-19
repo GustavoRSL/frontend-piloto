@@ -28,6 +28,8 @@ interface Employee {
   salary: string;
 }
 
+const URL_API = "URL_API";
+
 const EmployeeCRUD: React.FC = () => {
   const { toast } = useToast();
   const [employees, setEmployees] = useState<Employee[]>([]);
@@ -43,7 +45,7 @@ const EmployeeCRUD: React.FC = () => {
 
   const fetchEmployees = async () => {
     try {
-      const response = await fetch("http://localhost:3001/employees");
+      const response = await fetch(`${URL_API}/employees`);
       const data = await response.json();
       setEmployees(data);
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -63,14 +65,14 @@ const EmployeeCRUD: React.FC = () => {
   const saveEmployee = async () => {
     try {
       const response = editingEmployee
-        ? await fetch(`http://localhost:3001/employees/${editingEmployee.id}`, {
+        ? await fetch(`${URL_API}/employees/${editingEmployee.id}`, {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(newEmployee),
           })
-        : await fetch("http://localhost:3001/employees", {
+        : await fetch(`${URL_API}/employees`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -106,7 +108,7 @@ const EmployeeCRUD: React.FC = () => {
 
   const deleteEmployee = async (id: number) => {
     try {
-      const response = await fetch(`http://localhost:3001/employees/${id}`, {
+      const response = await fetch(`${URL_API}/employees/${id}`, {
         method: "DELETE",
       });
 
