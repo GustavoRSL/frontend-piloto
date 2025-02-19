@@ -8,8 +8,6 @@ import {
   ToastViewport,
 } from "./toast";
 
-import React from "react";
-
 export function Toaster() {
   const { toasts } = useToast();
 
